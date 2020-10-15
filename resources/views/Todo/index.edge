@@ -1,0 +1,43 @@
+@layout('./layout/master')
+@section('content')
+
+@if(flashMessage('success'))
+<div class="alert alert-success" role="alert">
+  <span>{{ flashMessage('success') }}</span>
+</div>
+@elseif(flashMessage('error'))
+<div class="alert alert-danger" role="alert">
+  <span>{{ flashMessage('error') }}</span>
+</div>
+@endif
+
+<div class="card mt-5" >
+    <div class="card-header">
+      Todo 
+    </div>
+    <div class="card-body">
+        <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+   @each(user in allUsers)
+    <tr>
+      <th scope="row">{{ user.id }}</th>
+      <td>{{ user.title }}</td>
+      <td><a href="{{route('todo.edit',{id:user.id})}}">Edit</a></td>
+      <td><a href="{{route('todo.delete',{id:user.id})}}">Delete</a></td>
+      
+    </tr>
+  @endeach
+    
+  </tbody>
+</table>  
+    </div>
+  </div>
+@endsection
